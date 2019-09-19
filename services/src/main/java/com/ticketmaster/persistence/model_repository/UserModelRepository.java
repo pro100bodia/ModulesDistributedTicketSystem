@@ -1,0 +1,51 @@
+package com.ticketmaster.persistence.model_repository;
+
+import com.ticketmaster.persistence.entity.Ticket;
+import com.ticketmaster.persistence.entity.User;
+import com.ticketmaster.persistence.repository.UserRepository;
+import com.ticketmaster.service.model.UserModel;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class UserModelRepository {
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
+
+    UserModelRepository(UserRepository userRepository, ModelMapper modelMapper) {
+        this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
+    }
+
+    public List<UserModel> findAll() {
+        List<User> users = userRepository.findAll();
+
+        // Define the target type
+        java.lang.reflect.Type targetListType = new TypeToken<List<UserModel>>() {
+        }.getType();
+        return modelMapper.map(users, targetListType);
+    }
+
+    public UserModel findByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return modelMapper.map(user, UserModel.class);
+    }
+
+    public void saveUser(UserModel userModel) {
+        User user = modelMapper.map(userModel, User.class);
+
+        userRepository.save(user);
+    }
+
+    public void deleteUser(String username) {
+        User user = userRepository.findByUsername(username);
+
+        for (Ticket ticket : user.getTickets())
+            ticket.getUsers().remove(user);
+
+        userRepository.delete(user);
+    }
+}
