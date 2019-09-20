@@ -1,20 +1,21 @@
 package com.ticketmaster.configuration;
 
 import com.ticketmaster.TicketSystemClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-@Configuration
 @EnableAutoConfiguration
+@Configuration
 public class RestConfig {
-    @Autowired
-    private RestTemplate restTemplate;
-
     @Bean
-    public TicketSystemClient restTemplate() {
+    public TicketSystemClient ticketSystemClient() {
+        RestTemplate restTemplate = new RestTemplateBuilder()
+                .basicAuthentication("serhiilytka", "serhiilytka")
+                .build();
+
         return new TicketSystemClient(restTemplate);
     }
 }
