@@ -1,28 +1,37 @@
 package com.ticketmaster;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.web.util.UriTemplate;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TicketSystemClient {
-
+    @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
     public TicketSystemClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    public ResponseEntity<UserDto> getUser(String username){
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        String template = "http://localhost:8080/api/users";
+        UriBuilder builder = UriComponentsBuilder.fromPath(template);
+        URI uri = builder.build();
+
+        return restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+        });
+    }
+
+    public ResponseEntity<UserDto> getUser(String username) {
         String template = "http://localhost:8080/api/users/{username}";
-        UriTemplate uriTemplate = new UriTemplate(template);
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
 
@@ -30,5 +39,32 @@ public class TicketSystemClient {
         URI uri = builder.build(params);
 
         return restTemplate.getForEntity(uri, UserDto.class);
+    }
+
+    public ResponseEntity<UserDto> addUser(UserDto userDto) {
+        String template = "http://localhost:8080/api/users/";
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<UserDto> httpEntity = new HttpEntity<>(userDto, httpHeaders);
+
+        return restTemplate.exchange(template, HttpMethod.POST, httpEntity, UserDto.class);
+    }
+
+    public ResponseEntity<UserDto> updateUser(Long id, UserDto userDto) {
+        String template = "http://localhost:8080/api/users/" + id;
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<UserDto> httpEntity = new HttpEntity<>(userDto, httpHeaders);
+
+        return restTemplate.exchange(template, HttpMethod.PUT, httpEntity, UserDto.class);
+    }
+
+    public ResponseEntity<UserDto> deleteUser(Long id) {
+        String template = "http://localhost:8080/api/users/" + id;
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<UserDto> httpEntity = new HttpEntity<>(httpHeaders);
+
+        return restTemplate.exchange(template, HttpMethod.DELETE, httpEntity, UserDto.class);
     }
 }
