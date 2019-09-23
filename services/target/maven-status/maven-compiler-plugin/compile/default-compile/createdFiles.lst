@@ -1,6 +1,4 @@
-com\ticketmaster\controller\dto\UserDto.class
 com\ticketmaster\Application.class
-com\ticketmaster\controller\dto\TicketDto.class
 com\ticketmaster\persistence\model_repository\UserModelRepository.class
 com\ticketmaster\controller\HelloController.class
 com\ticketmaster\config\security\SecurityJavaConfig.class

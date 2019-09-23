@@ -1,4 +1,4 @@
-package com.ticketmaster.controller.dto;
+package com.ticketmaster.api.dto;
 
 import java.util.Set;
 

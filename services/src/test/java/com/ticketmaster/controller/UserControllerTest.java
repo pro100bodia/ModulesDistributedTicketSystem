@@ -1,7 +1,7 @@
 package com.ticketmaster.controller;
 
-import com.ticketmaster.controller.dto.TicketDto;
-import com.ticketmaster.controller.dto.UserDto;
+import com.ticketmaster.api.dto.TicketDto;
+import com.ticketmaster.api.dto.UserDto;
 import com.ticketmaster.exceptions.NotFoundException;
 import com.ticketmaster.service.UserService;
 import com.ticketmaster.service.model.TicketModel;

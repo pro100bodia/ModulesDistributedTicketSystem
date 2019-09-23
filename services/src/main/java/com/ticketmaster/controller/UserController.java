@@ -1,6 +1,6 @@
 package com.ticketmaster.controller;
 
-import com.ticketmaster.controller.dto.UserDto;
+import com.ticketmaster.api.dto.UserDto;
 import com.ticketmaster.service.UserService;
 import com.ticketmaster.service.model.UserModel;
 import org.modelmapper.ModelMapper;

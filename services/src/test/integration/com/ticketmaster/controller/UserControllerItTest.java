@@ -2,7 +2,7 @@ package com.ticketmaster.controller;
 
 import com.google.gson.Gson;
 import com.ticketmaster.Application;
-import com.ticketmaster.controller.dto.UserDto;
+import com.ticketmaster.api.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

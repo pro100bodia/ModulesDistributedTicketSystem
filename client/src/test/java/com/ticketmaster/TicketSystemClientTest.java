@@ -1,5 +1,7 @@
 package com.ticketmaster;
 
+import com.ticketmaster.api.dto.TicketDto;
+import com.ticketmaster.api.dto.UserDto;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
