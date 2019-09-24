@@ -57,10 +57,10 @@ public class UserControllerTest {
 
     @BeforeClass
     public static void initUserModels() {
-        TicketModel ticket1 = new TicketModel(1L, "title1", "description for title1", date1);
-        TicketModel ticket2 = new TicketModel(2L, "title2", "description for title2", date2);
-        TicketModel ticket3 = new TicketModel(3L, "title3", "description for title3", date3);
-        TicketModel ticket4 = new TicketModel(4L, "title4", "description for title4", date4);
+        TicketModel ticket1 = new TicketModel(1L, "title1", "description for title1", date1, null);
+        TicketModel ticket2 = new TicketModel(2L, "title2", "description for title2", date2, null);
+        TicketModel ticket3 = new TicketModel(3L, "title3", "description for title3", date3, null);
+        TicketModel ticket4 = new TicketModel(4L, "title4", "description for title4", date4, null);
 
         Set<TicketModel> tickets1 = Set.of(ticket1, ticket2);
         Set<TicketModel> tickets2 = Set.of(ticket3);
@@ -159,8 +159,10 @@ public class UserControllerTest {
         LocalDateTime date2 = LocalDateTime.of(
                 LocalDate.of(2019, 9, 11), LocalTime.of(12, 30, 0));
 
-        TicketModel ticket1 = new TicketModel(1L, "title1", "description for title1", date1);
-        TicketModel ticket2 = new TicketModel(2L, "title2", "description for title2", date2);
+        TicketModel ticket1 = new TicketModel(
+                1L, "title1", "description for title1", date1, null);
+        TicketModel ticket2 = new TicketModel(
+                2L, "title2", "description for title2", date2, null);
         Set<TicketModel> tickets = Set.of(ticket1, ticket2);
 
         UserModel userModel = new UserModel(1L, "serhiilytka", "Serhii", "Lytka",
@@ -178,6 +180,76 @@ public class UserControllerTest {
         when(modelMapper.map(userModel, UserDto.class)).thenReturn(userDto);
 
         ResponseEntity<UserDto> responseEntity = subject.getUserByUsername(username);
+
+        //then
+        assertEquals(userDto, responseEntity.getBody());
+    }
+
+    @Test
+    public void givenNullUsername_whenSaveUserOrUpdateUser_thenReturnNotFound() {
+        //given
+
+        //when
+        when(userService.saveUser(null)).thenThrow(NotFoundException.class);
+
+        exceptionRule.expect(NotFoundException.class);
+        ResponseEntity<UserDto> responseEntity = subject.saveUser(null);
+
+        //then
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        assertNull(responseEntity.getBody());
+    }
+
+    @Test
+    public void givenEmptyUsername_whenSaveUserOrUpdateUser_thenReturnNotFound() {
+        //given
+        UserDto nonameUser = new UserDto(8L, "", "", "", "", null);
+        UserModel nonameUserModel = new UserModel(
+                8L, "", "", "", "", null);
+
+        //when
+        when(modelMapper.map(nonameUser, UserModel.class)).thenReturn(nonameUserModel);
+        when(userService.saveUser(nonameUserModel)).thenThrow(NotFoundException.class);
+
+        exceptionRule.expect(NotFoundException.class);
+        ResponseEntity<UserDto> responseEntity = subject.saveUser(nonameUser);
+
+        //then
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        assertNull(responseEntity.getBody());
+    }
+
+    @Test
+    public void givenValidUser_whenSaveUserOrUpdateUser_thenReturnUserWithTickets() {
+        //given
+        LocalDateTime date1 = LocalDateTime.of(
+                LocalDate.of(2019, 9, 11), LocalTime.of(12, 0, 0));
+        LocalDateTime date2 = LocalDateTime.of(
+                LocalDate.of(2019, 9, 11), LocalTime.of(12, 30, 0));
+
+        TicketModel ticket1 = new TicketModel(
+                1L, "title1", "description for title1", date1, null);
+        TicketModel ticket2 = new TicketModel(
+                2L, "title2", "description for title2", date2, null);
+        Set<TicketModel> tickets = Set.of(ticket1, ticket2);
+
+        UserModel userModel = new UserModel(1L, "serhiilytka", "Serhii", "Lytka",
+                "serhii@gmail.com", tickets);
+
+
+        TicketDto ticketDto1 = new TicketDto(1L, "title1", "description for title1", date1);
+        TicketDto ticketDto2 = new TicketDto(2L, "title2", "description for title2", date2);
+        Set<TicketDto> ticketsDto = Set.of(ticketDto1, ticketDto2);
+
+        UserDto userDto = new UserDto(1L, "serhiilytka", "Serhii", "Lytka",
+                "serhii@gmail.com", ticketsDto);
+
+        //when
+        when(modelMapper.map(userDto, UserModel.class)).thenReturn(userModel);
+        when(userService.saveUser(userModel)).thenReturn(userModel);
+        when(modelMapper.map(userModel, UserDto.class)).thenReturn(userDto);
+
+        ResponseEntity<UserDto> responseEntity = subject.saveUser(userDto);
 
         //then
         assertEquals(userDto, responseEntity.getBody());

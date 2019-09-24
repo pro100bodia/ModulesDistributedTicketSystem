@@ -10,9 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,10 +19,7 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -47,6 +42,8 @@ public class TicketSystemClientTest {
             LocalDate.of(2019, 9, 11), LocalTime.of(13, 30, 0));
 
     private static List<UserDto> userDtos;
+
+    private static final String template = "http://localhost:8080/api/users/";
 
     @BeforeClass
     public static void initUserDtos() {
@@ -74,33 +71,33 @@ public class TicketSystemClientTest {
     }
 
     @Test
-    public void shouldReturnUserDtosList() {
+    public void shouldReturnUserDtosList_whenGetAllUsers() {
         //given
-        String template = "http://localhost:8080/api/users";
         UriBuilder builder = UriComponentsBuilder.fromPath(template);
         URI uri = builder.build();
 
         //when
         when(restTemplate.exchange(uri, HttpMethod.GET, null,
-                    new ParameterizedTypeReference<List<UserDto>>() {}))
+                new ParameterizedTypeReference<List<UserDto>>() {
+                }))
                 .thenReturn(new ResponseEntity<>(userDtos, HttpStatus.OK));
 
         ResponseEntity<List<UserDto>> result = subject.getAllUsers();
+
         //then
         assertThat(userDtos).isEqualTo(result.getBody());
     }
 
     @Test
-    public void shouldReturnUserDto_whenGet() {
+    public void shouldReturnUserDto_whenGetUser() {
         //given
         String username = "serhiilytka";
 
         //when
-        String template = "http://localhost:8080/api/users/{username}";
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
 
-        UriBuilder builder = UriComponentsBuilder.fromPath(template);
+        UriBuilder builder = UriComponentsBuilder.fromPath(template + "{username}");
         URI uri = builder.build(params);
 
         when(restTemplate.getForEntity(uri, UserDto.class))
@@ -109,6 +106,67 @@ public class TicketSystemClientTest {
 
         //then
         assertEquals(userDtos.get(0), result.getBody());
+    }
+
+    @Test
+    public void shouldReturnUserDto_whenAddUser() {
+        //given
+        UserDto newUser = new UserDto(8L, "newbie", "Newbie", "Pawhands",
+                "newbiepawhands@gmail.com", null);
+        //when
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<UserDto> httpEntity = new HttpEntity<>(newUser, httpHeaders);
+
+        when(restTemplate.exchange(template, HttpMethod.POST, httpEntity, UserDto.class))
+                .thenReturn(new ResponseEntity<>(newUser, HttpStatus.OK));
+
+        ResponseEntity<UserDto> result = subject.addUser(newUser);
+        //then
+        assertEquals(newUser, result.getBody());
+    }
+
+    @Test
+    public void shouldReturnUserDto_whenUpdateUser() {
+        //given
+        Long id = 8L;
+        UserDto newUser = new UserDto(8L, "newbie", "Newbie", "Pawhands",
+                "newbiepawhands@gmail.com", null);
+
+        //when
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<UserDto> httpEntity = new HttpEntity<>(newUser, httpHeaders);
+
+        when(restTemplate.exchange(template + id, HttpMethod.PUT, httpEntity, UserDto.class))
+                .thenReturn(new ResponseEntity<>(newUser, HttpStatus.OK));
+
+        ResponseEntity<UserDto> result = subject.updateUser(id, newUser);
+
+        //then
+        assertEquals(newUser, result.getBody());
+    }
+
+    @Test
+    public void shouldReturnUserDto_whenDeleteUser() {
+        //given
+        Long id = 8L;
+
+        //when
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<UserDto> httpEntity = new HttpEntity<>(httpHeaders);
+
+        UserDto newUser = new UserDto(8L, "newbie", "Newbie", "Pawhands",
+                "newbiepawhands@gmail.com", null);
+
+        when(restTemplate.exchange(template + id, HttpMethod.DELETE, httpEntity, UserDto.class))
+                .thenReturn(new ResponseEntity<>(newUser, HttpStatus.OK));
+
+        ResponseEntity<UserDto> result = subject.deleteUser(id);
+
+        //then
+        assertEquals(newUser, result.getBody());
     }
 
     @AfterClass

@@ -1,5 +1,6 @@
 package com.ticketmaster.persistence.model_repository;
 
+import com.ticketmaster.persistence.entity.Role;
 import com.ticketmaster.persistence.entity.Ticket;
 import com.ticketmaster.persistence.entity.User;
 import com.ticketmaster.persistence.repository.UserRepository;
@@ -59,20 +60,24 @@ public class UserModelRepositoryTest {
         Set<Ticket> tickets3 = Set.of(ticket4);
 
         User user1 = new User(1L, "serhiilytka", "Serhii", "Lytka",
-                "serhii@gmail.com", tickets1);
+                "serhii@gmail.com", Role.ADMIN, tickets1);
         User user2 = new User(2L, "marypublic", "Mary", "Public",
-                "'mary@gmail.com'", tickets2);
+                "'mary@gmail.com'", Role.CASHIER, tickets2);
         User user3 = new User(3L, "johndou", "John", "Dou",
-                "'john@gmail.com'", tickets3);
+                "'john@gmail.com'", Role.USER, tickets3);
         users = List.of(user1, user2, user3);
     }
 
     @BeforeClass
         public static void initUserModels() {
-            TicketModel ticket1 = new TicketModel(1L, "title1", "description for title1", date1);
-            TicketModel ticket2 = new TicketModel(2L, "title2", "description for title2", date2);
-            TicketModel ticket3 = new TicketModel(3L, "title3", "description for title3", date3);
-            TicketModel ticket4 = new TicketModel(4L, "title4", "description for title4", date4);
+        TicketModel ticket1 = new TicketModel(
+                1L, "title1", "description for title1", date1, null);
+        TicketModel ticket2 = new TicketModel(
+                2L, "title2", "description for title2", date2, null);
+        TicketModel ticket3 = new TicketModel(
+                3L, "title3", "description for title3", date3, null);
+        TicketModel ticket4 = new TicketModel(
+                4L, "title4", "description for title4", date4, null);
 
             Set<TicketModel> tickets1 = Set.of(ticket1, ticket2);
             Set<TicketModel> tickets2 = Set.of(ticket3);
@@ -148,12 +153,14 @@ public class UserModelRepositoryTest {
         Set<Ticket> tickets = Set.of(ticket1, ticket2);
 
         User user = new User(1L, "serhiilytka", "Serhii", "Lytka",
-                "serhii@gmail.com", tickets);
+                "serhii@gmail.com", Role.ADMIN, tickets);
 
         when(userRepo.findByUsername(username)).thenReturn(user);
 
-        TicketModel ticketModel1 = new TicketModel(1L, "title1", "description for title1", date1);
-        TicketModel ticketModel2 = new TicketModel(2L, "title2", "description for title2", date2);
+        TicketModel ticketModel1 = new TicketModel(
+                1L, "title1", "description for title1", date1, null);
+        TicketModel ticketModel2 = new TicketModel(
+                2L, "title2", "description for title2", date2, null);
         Set<TicketModel> ticketsModel = Set.of(ticketModel1, ticketModel2);
 
         UserModel userModel = new UserModel(1L, "serhiilytka", "Serhii", "Lytka",

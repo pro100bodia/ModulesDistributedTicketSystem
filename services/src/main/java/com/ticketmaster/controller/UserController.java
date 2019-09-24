@@ -44,17 +44,15 @@ class UserController {
     }
 
     @PostMapping
-    public void saveUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
         UserModel userModel = modelMapper.map(userDto, UserModel.class);
 
-        userService.saveUser(userModel);
+        return new ResponseEntity<>(modelMapper.map(userService.saveUser(userModel), UserDto.class), HttpStatus.OK);
     }
 
     @PutMapping("{username}")
-    public void updateUser(@RequestBody UserDto userDto) {
-        UserModel userModel = modelMapper.map(userDto, UserModel.class);
-
-        userService.saveUser(userModel);
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+        return saveUser(userDto);
     }
 
     @DeleteMapping("{username}")

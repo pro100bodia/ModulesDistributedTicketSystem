@@ -34,10 +34,10 @@ public class UserModelRepository {
         return modelMapper.map(user, UserModel.class);
     }
 
-    public void saveUser(UserModel userModel) {
+    public UserModel saveUser(UserModel userModel) {
         User user = modelMapper.map(userModel, User.class);
 
-        userRepository.save(user);
+        return modelMapper.map(userRepository.save(user), UserModel.class);
     }
 
     public void deleteUser(String username) {

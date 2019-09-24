@@ -44,10 +44,14 @@ public class UserServiceTest {
 
     @BeforeClass
     public static void initUserModels() {
-        TicketModel ticket1 = new TicketModel(1L, "title1", "description for title1", date1);
-        TicketModel ticket2 = new TicketModel(2L, "title2", "description for title2", date2);
-        TicketModel ticket3 = new TicketModel(3L, "title3", "description for title3", date3);
-        TicketModel ticket4 = new TicketModel(4L, "title4", "description for title4", date4);
+        TicketModel ticket1 = new TicketModel(
+                1L, "title1", "description for title1", date1, null);
+        TicketModel ticket2 = new TicketModel(
+                2L, "title2", "description for title2", date2, null);
+        TicketModel ticket3 = new TicketModel(
+                3L, "title3", "description for title3", date3, null);
+        TicketModel ticket4 = new TicketModel(
+                4L, "title4", "description for title4", date4, null);
 
         Set<TicketModel> tickets1 = Set.of(ticket1, ticket2);
         Set<TicketModel> tickets2 = Set.of(ticket3);
@@ -116,8 +120,10 @@ public class UserServiceTest {
         LocalDateTime date2 = LocalDateTime.of(
                 LocalDate.of(2019, 9, 11), LocalTime.of(12, 30, 0));
 
-        TicketModel ticket1 = new TicketModel(1L, "title1", "description for title1", date1);
-        TicketModel ticket2 = new TicketModel(2L, "title2", "description for title2", date2);
+        TicketModel ticket1 = new TicketModel(
+                1L, "title1", "description for title1", date1, null);
+        TicketModel ticket2 = new TicketModel(
+                2L, "title2", "description for title2", date2, null);
         Set<TicketModel> tickets = Set.of(ticket1, ticket2);
 
         UserModel userModel = new UserModel(1L, "serhiilytka", "Serhii", "Lytka",

@@ -36,10 +36,12 @@ public class UserService {
         return result;
     }
 
-    public void saveUser(UserModel userModel) {
-        //TODO: implement 406 Not Acceptable exception throw
+    public UserModel saveUser(UserModel userModel) {
+        if (userModel == null || userModel.getUsername().equals("")) {
+            throw new NotFoundException("Requested user is null");
+        }
 
-        userRepo.saveUser(userModel);
+        return userRepo.saveUser(userModel);
     }
 
 
