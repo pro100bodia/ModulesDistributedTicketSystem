@@ -24,7 +24,7 @@ class UserController {
     }
 
     @GetMapping
-    ResponseEntity<List<UserDto>> findAll() {
+    public ResponseEntity<List<UserDto>> findAll() {
         List<UserModel> userModels = userService.findAll();
 
         // Define the target type
@@ -36,7 +36,7 @@ class UserController {
     }
 
     @GetMapping("{username}")
-    ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
         UserModel userModel = userService.getUserByUsername(username);
         UserDto userDto = modelMapper.map(userModel, UserDto.class);
 
@@ -44,21 +44,21 @@ class UserController {
     }
 
     @PostMapping
-    void saveUser(@RequestBody UserDto userDto) {
+    public void saveUser(@RequestBody UserDto userDto) {
         UserModel userModel = modelMapper.map(userDto, UserModel.class);
 
         userService.saveUser(userModel);
     }
 
     @PutMapping("{username}")
-    void updateUser(@RequestBody UserDto userDto) {
+    public void updateUser(@RequestBody UserDto userDto) {
         UserModel userModel = modelMapper.map(userDto, UserModel.class);
 
         userService.saveUser(userModel);
     }
 
     @DeleteMapping("{username}")
-    void deleteUser(@PathVariable String username) {
+    public void deleteUser(@PathVariable String username) {
         userService.deleteUser(username);
     }
 }
