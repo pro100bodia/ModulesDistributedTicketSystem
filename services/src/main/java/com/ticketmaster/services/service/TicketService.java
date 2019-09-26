@@ -1,15 +1,15 @@
 package com.ticketmaster.services.service;
 
-import com.ticketmaster.services.persistence.model_repository.TicketModelRepository;
+import com.ticketmaster.services.persistence.model_repository.TicketJpaModelRepository;
 import com.ticketmaster.services.service.model.TicketModel;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TicketService {
 
-    private TicketModelRepository ticketRepo;
+    private TicketJpaModelRepository ticketRepo;
 
-    public TicketService(TicketModelRepository ticketRepository) {
+    public TicketService(TicketJpaModelRepository ticketRepository) {
         this.ticketRepo = ticketRepository;
     }
 

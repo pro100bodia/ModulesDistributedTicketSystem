@@ -1,7 +1,7 @@
 package com.ticketmaster.services.service;
 
 import com.ticketmaster.services.exceptions.NotFoundException;
-import com.ticketmaster.services.persistence.model_repository.UserModelRepository;
+import com.ticketmaster.services.persistence.model_repository.UserJpaModelRepository;
 import com.ticketmaster.services.service.model.UserModel;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserModelRepository userRepo;
+    private UserJpaModelRepository userRepo;
 
-    UserService(UserModelRepository userRepo) {
+    UserService(UserJpaModelRepository userRepo) {
         this.userRepo = userRepo;
     }
 

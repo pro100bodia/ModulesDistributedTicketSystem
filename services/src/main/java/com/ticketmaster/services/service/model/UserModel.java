@@ -1,5 +1,6 @@
 package com.ticketmaster.services.service.model;
 
+import com.ticketmaster.services.persistence.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,6 @@ public class UserModel {
     private String firstName;
     private String lastName;
     private String email;
-
+    private Role role;
     private Set<TicketModel> tickets;
 }

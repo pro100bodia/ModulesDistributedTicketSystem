@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, Long> {
+public interface TicketEntityRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findAll();
 
     Optional<Ticket> findById(Long id);
