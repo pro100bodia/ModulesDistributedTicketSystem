@@ -1,4 +1,4 @@
-package com.ticketmaster.api.dto;
+package com.ticketmaster.services.service.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,13 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserDto {
+public class UserModel {
     private Long id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String email;
-    private Set<TicketDto> tickets;
+
+    private Set<TicketModel> tickets;
 }

@@ -56,11 +56,11 @@ public class TicketSystemClientTest {
         Set<TicketDto> tickets2 = Set.of(ticket3);
         Set<TicketDto> tickets3 = Set.of(ticket4);
 
-        UserDto user1 = new UserDto(1L, "serhiilytka", "Serhii", "Lytka",
+        UserDto user1 = new UserDto(1L, "serhiilytka", "1111", "Serhii", "Lytka",
                 "serhii@gmail.com", tickets1);
-        UserDto user2 = new UserDto(2L, "marypublic", "Mary", "Public",
+        UserDto user2 = new UserDto(2L, "marypublic", "1111", "Mary", "Public",
                 "'mary@gmail.com'", tickets2);
-        UserDto user3 = new UserDto(3L, "johndou", "John", "Dou",
+        UserDto user3 = new UserDto(3L, "johndou", "1111", "John", "Dou",
                 "'john@gmail.com'", tickets3);
         userDtos = List.of(user1, user2, user3);
     }
@@ -111,7 +111,7 @@ public class TicketSystemClientTest {
     @Test
     public void shouldReturnUserDto_whenAddUser() {
         //given
-        UserDto newUser = new UserDto(8L, "newbie", "Newbie", "Pawhands",
+        UserDto newUser = new UserDto(8L, "newbie", "1111", "Newbie", "Pawhands",
                 "newbiepawhands@gmail.com", null);
         //when
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -130,7 +130,7 @@ public class TicketSystemClientTest {
     public void shouldReturnUserDto_whenUpdateUser() {
         //given
         Long id = 8L;
-        UserDto newUser = new UserDto(8L, "newbie", "Newbie", "Pawhands",
+        UserDto newUser = new UserDto(8L, "newbie", "1111", "Newbie", "Pawhands",
                 "newbiepawhands@gmail.com", null);
 
         //when
@@ -157,7 +157,7 @@ public class TicketSystemClientTest {
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<UserDto> httpEntity = new HttpEntity<>(httpHeaders);
 
-        UserDto newUser = new UserDto(8L, "newbie", "Newbie", "Pawhands",
+        UserDto newUser = new UserDto(8L, "newbie", "1111", "Newbie", "Pawhands",
                 "newbiepawhands@gmail.com", null);
 
         when(restTemplate.exchange(template + id, HttpMethod.DELETE, httpEntity, UserDto.class))

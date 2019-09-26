@@ -10,11 +10,6 @@
     <version>1.1-SNAPSHOT</version>
     <name>services</name>
     <url>http://maven.apache.org</url>
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <lombok.version>1.18.8</lombok.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>com.ticketmaster</groupId>
@@ -95,16 +90,18 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
+                    <mainClass>com.ticketmaster.services.Application</mainClass>
+                    <classifier>exec</classifier>
+                    <layout>JAR</layout>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
