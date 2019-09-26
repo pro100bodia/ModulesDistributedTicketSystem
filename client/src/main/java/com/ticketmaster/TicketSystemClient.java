@@ -1,7 +1,6 @@
 package com.ticketmaster;
 
 import com.ticketmaster.api.dto.UserDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -16,24 +15,19 @@ import java.util.Map;
 
 public class TicketSystemClient {
     private static final String template = "http://localhost:8080/api/users/";
-
-    @Autowired
     private RestTemplate restTemplate;
 
     public TicketSystemClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    ResponseEntity<List<UserDto>> getAllUsers() {
-        UriBuilder builder = UriComponentsBuilder.fromPath(template);
-        URI uri = builder.build();
-
-        return restTemplate.exchange(uri, HttpMethod.GET, null,
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        return restTemplate.exchange(template, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<UserDto>>() {
                 });
     }
 
-    ResponseEntity<UserDto> getUser(String username) {
+    public ResponseEntity<UserDto> getUser(String username) {
         Map<String, String> params = new HashMap<>();
         params.put("username", username);
 

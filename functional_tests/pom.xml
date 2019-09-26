@@ -54,5 +54,11 @@
             <version>1.1-SNAPSHOT</version>
 
         </dependency>
+        <dependency>
+            <groupId>com.ticketmaster</groupId>
+            <artifactId>client</artifactId>
+            <version>1.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
