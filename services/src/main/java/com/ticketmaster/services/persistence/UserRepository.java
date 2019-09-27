@@ -12,4 +12,10 @@ public interface UserRepository {
     UserModel saveUser(UserModel userModel);
 
     void deleteUser(String username);
+
+    DataType getType();
+
+    default boolean supportType(DataType type) {
+        return type.equals(getType());
+    }
 }

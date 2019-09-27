@@ -1,5 +1,6 @@
 package com.ticketmaster.services.persistence.model_repository;
 
+import com.ticketmaster.services.persistence.DataType;
 import com.ticketmaster.services.persistence.UserRepository;
 import com.ticketmaster.services.persistence.entity.Ticket;
 import com.ticketmaster.services.persistence.entity.User;
@@ -15,10 +16,16 @@ import java.util.List;
 public class UserJpaModelRepository implements UserRepository {
     private final UserEntityRepository userEntityRepository;
     private final ModelMapper modelMapper;
+    private static final DataType type = DataType.H2;
 
     UserJpaModelRepository(UserEntityRepository userEntityRepository, ModelMapper modelMapper) {
         this.userEntityRepository = userEntityRepository;
         this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public DataType getType() {
+        return type;
     }
 
     public List<UserModel> findAll() {

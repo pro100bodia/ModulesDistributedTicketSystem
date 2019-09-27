@@ -1,7 +1,8 @@
 package com.ticketmaster.services.service;
 
 import com.ticketmaster.services.exceptions.NotFoundException;
-import com.ticketmaster.services.persistence.model_repository.UserJpaModelRepository;
+import com.ticketmaster.services.persistence.DataType;
+import com.ticketmaster.services.persistence.UserRepository;
 import com.ticketmaster.services.service.model.UserModel;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +10,23 @@ import java.util.List;
 
 @Service
 public class UserService {
+    private List<UserRepository> repositoryList;
 
-    private UserJpaModelRepository userRepo;
-
-    UserService(UserJpaModelRepository userRepo) {
-        this.userRepo = userRepo;
+    public UserService(List<UserRepository> repositoryList) {
+        this.repositoryList = repositoryList;
     }
 
-    public List<UserModel> findAll() {
-        List<UserModel> userModels = userRepo.findAll();
+    public List<UserModel> findAll(DataType db) {
+        UserRepository suitableRepo = repositoryList.get(0);
+
+        for (UserRepository userRepo : repositoryList) {
+            if (userRepo.supportType(db)) {
+//                System.out.println("**********************************Repository type is:" + db);
+                suitableRepo = userRepo;
+            }
+        }
+
+        List<UserModel> userModels = suitableRepo.findAll();
 
         if (userModels == null) {
             throw new NotFoundException("Database has no users");
@@ -26,26 +35,26 @@ public class UserService {
         return userModels;
     }
 
-    public UserModel getUserByUsername(String username) {
-        UserModel result = userRepo.findByUsername(username);
-
-        if (result == null) {
-            throw new NotFoundException("User not found");
-        }
-
-        return result;
-    }
-
-    public UserModel saveUser(UserModel userModel) {
-        if (userModel == null || userModel.getUsername().equals("")) {
-            throw new NotFoundException("Requested user is null");
-        }
-
-        return userRepo.saveUser(userModel);
-    }
-
-
-    public void deleteUser(String username) {
-        userRepo.deleteUser(username);
-    }
+//    public UserModel getUserByUsername(String username) {
+//        UserModel result = userRepo.findByUsername(username);
+//
+//        if (result == null) {
+//            throw new NotFoundException("User not found");
+//        }
+//
+//        return result;
+//    }
+//
+//    public UserModel saveUser(UserModel userModel) {
+//        if (userModel == null || userModel.getUsername().equals("")) {
+//            throw new NotFoundException("Requested user is null");
+//        }
+//
+//        return userRepo.saveUser(userModel);
+//    }
+//
+//
+//    public void deleteUser(String username) {
+//        userRepo.deleteUser(username);
+//    }
 }
