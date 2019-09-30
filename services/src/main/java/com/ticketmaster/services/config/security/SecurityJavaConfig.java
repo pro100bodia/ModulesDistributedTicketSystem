@@ -31,32 +31,20 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .passwordEncoder(encoder())
-                .usersByUsernameQuery("SELECT name, password, true FROM user WHERE name=?")
-                .authoritiesByUsernameQuery("SELECT name, role FROM user WHERE name=?");
+                .passwordEncoder(bcryptPasswordEncoder())
+                .usersByUsernameQuery("SELECT username, password, true FROM user WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT username, role FROM user WHERE username=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(restAuthenticationEntryPoint)
-                .and()
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/users").hasRole("CASHIER")
-                .antMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/users").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/users").hasRole("CASHIER")
-                .antMatchers(HttpMethod.DELETE, "/api/users").hasRole("ADMIN")
-                .and()
-                .formLogin()
-                .successHandler(mySuccessHandler)
-                .failureHandler(myFailureHandler())
-                .and()
-                .logout();
+                .antMatchers(HttpMethod.GET, "/api/users/**").hasRole("ADMIN, CASHIER")
+                .antMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN, CASHIER")
+                .antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN");
 
         http.csrf()
                 .ignoringAntMatchers("/h2-console/**");
@@ -66,7 +54,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    PasswordEncoder encoder() {
+    PasswordEncoder bcryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

@@ -1,7 +1,6 @@
 package com.ticketmaster.services.controller;
 
 import com.ticketmaster.api.dto.UserDto;
-import com.ticketmaster.services.annotation.Timer;
 import com.ticketmaster.services.persistence.DataType;
 import com.ticketmaster.services.service.UserService;
 import com.ticketmaster.services.service.model.UserModel;
@@ -28,7 +27,6 @@ class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @Timer
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll(@RequestHeader(name = "db", required = false, defaultValue = "h2") DataType db) {
         List<UserModel> userModels = userService.findAll(db);
