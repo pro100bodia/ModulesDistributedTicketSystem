@@ -1,10 +1,9 @@
-package com.ticketmaster.services.persistence.model_repository;
+package com.ticketmaster.services.persistence.repository.jpa;
 
-import com.ticketmaster.services.persistence.DataType;
-import com.ticketmaster.services.persistence.UserRepository;
 import com.ticketmaster.services.persistence.entity.Ticket;
 import com.ticketmaster.services.persistence.entity.User;
-import com.ticketmaster.services.persistence.repository.UserEntityRepository;
+import com.ticketmaster.services.persistence.repository.DataType;
+import com.ticketmaster.services.persistence.repository.UserRepository;
 import com.ticketmaster.services.service.model.UserModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

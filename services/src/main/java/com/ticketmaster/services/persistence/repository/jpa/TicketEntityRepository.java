@@ -1,4 +1,4 @@
-package com.ticketmaster.services.persistence.repository;
+package com.ticketmaster.services.persistence.repository.jpa;
 
 import com.ticketmaster.services.persistence.entity.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;

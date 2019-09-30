@@ -1,6 +1,6 @@
 package com.ticketmaster.services.controller;
 
-import com.ticketmaster.services.persistence.DataType;
+import com.ticketmaster.services.persistence.repository.DataType;
 import org.springframework.core.convert.converter.Converter;
 
 

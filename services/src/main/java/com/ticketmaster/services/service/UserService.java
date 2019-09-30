@@ -1,8 +1,8 @@
 package com.ticketmaster.services.service;
 
 import com.ticketmaster.services.exceptions.NotFoundException;
-import com.ticketmaster.services.persistence.DataType;
-import com.ticketmaster.services.persistence.UserRepository;
+import com.ticketmaster.services.persistence.repository.DataType;
+import com.ticketmaster.services.persistence.repository.UserRepository;
 import com.ticketmaster.services.service.model.UserModel;
 import org.springframework.stereotype.Service;
 

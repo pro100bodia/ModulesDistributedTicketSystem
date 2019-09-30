@@ -1,4 +1,4 @@
-package com.ticketmaster.services.persistence;
+package com.ticketmaster.services.persistence.repository;
 
 import com.ticketmaster.services.service.model.UserModel;
 

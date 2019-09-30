@@ -1,8 +1,8 @@
-package com.ticketmaster.services.persistence.model_repository;
+package com.ticketmaster.services.persistence.repository.jdbc;
 
-import com.ticketmaster.services.persistence.DataType;
-import com.ticketmaster.services.persistence.UserRepository;
 import com.ticketmaster.services.persistence.entity.Role;
+import com.ticketmaster.services.persistence.repository.DataType;
+import com.ticketmaster.services.persistence.repository.UserRepository;
 import com.ticketmaster.services.service.model.TicketModel;
 import com.ticketmaster.services.service.model.UserModel;
 import org.springframework.jdbc.core.JdbcTemplate;

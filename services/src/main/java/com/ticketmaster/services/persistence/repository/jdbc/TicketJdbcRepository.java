@@ -1,6 +1,6 @@
-package com.ticketmaster.services.persistence.model_repository;
+package com.ticketmaster.services.persistence.repository.jdbc;
 
-import com.ticketmaster.services.persistence.TicketRepository;
+import com.ticketmaster.services.persistence.repository.TicketRepository;
 import com.ticketmaster.services.service.model.TicketModel;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

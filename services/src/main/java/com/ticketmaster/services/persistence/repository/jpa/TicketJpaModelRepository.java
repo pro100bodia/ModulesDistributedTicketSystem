@@ -1,8 +1,7 @@
-package com.ticketmaster.services.persistence.model_repository;
+package com.ticketmaster.services.persistence.repository.jpa;
 
-import com.ticketmaster.services.persistence.TicketRepository;
 import com.ticketmaster.services.persistence.entity.Ticket;
-import com.ticketmaster.services.persistence.repository.TicketEntityRepository;
+import com.ticketmaster.services.persistence.repository.TicketRepository;
 import com.ticketmaster.services.service.model.TicketModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;

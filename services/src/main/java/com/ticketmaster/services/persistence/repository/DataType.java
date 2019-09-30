@@ -1,4 +1,4 @@
-package com.ticketmaster.services.persistence;
+package com.ticketmaster.services.persistence.repository;
 
 public enum DataType {
     H2, MYSQL;
