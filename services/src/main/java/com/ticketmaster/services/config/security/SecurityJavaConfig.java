@@ -11,22 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    DispatcherServlet dispatcherServlet;
-
-    @Autowired
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-
-    @Autowired
-    private TicketMasterRequestAwareAuthenticationSuccessHandler mySuccessHandler;
-
     @Autowired
     private DataSource dataSource;
 
@@ -35,7 +25,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-//                .passwordEncoder(auth)
+                .passwordEncoder(bcryptPasswordEncoder())
                 .usersByUsernameQuery("SELECT username, password, true FROM user WHERE username=?")
                 .authoritiesByUsernameQuery("SELECT username, role FROM user WHERE username=?");
 
@@ -59,8 +49,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin().disable();
 
-        http.csrf()
-                .ignoringAntMatchers("/h2-console/**");
+
         http.headers()
                 .frameOptions()
                 .sameOrigin();

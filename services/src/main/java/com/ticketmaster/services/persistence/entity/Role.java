@@ -1,5 +1,5 @@
 package com.ticketmaster.services.persistence.entity;
 
 public enum Role {
-    ADMIN, CASHIER, USER
+    ROLE_ADMIN, ROLE_CASHIER, ROLE_USER
 }

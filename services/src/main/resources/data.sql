@@ -1,7 +1,7 @@
 INSERT INTO user (username, password, first_name, last_name, email, role) VALUES
-  ('serhiilytka', '1111', 'Serhii', 'Lytka', 'serhii@gmail.com', 'ADMIN'),
-  ('marypublic', '$2a$04$8km1JN9lPh4C3jn.lsAZiuIq.8xK4QZAWrzSZpZo6TpV7c4gi5Fyu', 'Mary', 'Public', 'mary@gmail.com', 'CASHIER'),
-  ('johndou', '$2a$04$8km1JN9lPh4C3jn.lsAZiuIq.8xK4QZAWrzSZpZo6TpV7c4gi5Fyu', 'John', 'Dou', 'john@gmail.com', 'USER');
+  ('serhiilytka', '$2a$04$sBdQjNR9AlTv1XG32g.0LO8Zfoq9QDhA02vKn07AMvRZsdzU.gJgq', 'Serhii', 'Lytka', 'serhii@gmail.com', 'ROLE_ADMIN'),
+  ('marypublic', '$2a$04$8km1JN9lPh4C3jn.lsAZiuIq.8xK4QZAWrzSZpZo6TpV7c4gi5Fyu', 'Mary', 'Public', 'mary@gmail.com', 'ROLE_CASHIER'),
+  ('johndou', '$2a$04$8km1JN9lPh4C3jn.lsAZiuIq.8xK4QZAWrzSZpZo6TpV7c4gi5Fyu', 'John', 'Dou', 'john@gmail.com', 'ROLE_USER');
 
 
 INSERT INTO ticket (title, description, created_at) VALUES
