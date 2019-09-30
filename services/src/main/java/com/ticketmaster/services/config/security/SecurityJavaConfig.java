@@ -11,12 +11,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    DispatcherServlet dispatcherServlet;
+
     @Autowired
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
@@ -31,20 +35,29 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .passwordEncoder(bcryptPasswordEncoder())
+//                .passwordEncoder(auth)
                 .usersByUsernameQuery("SELECT username, password, true FROM user WHERE username=?")
                 .authoritiesByUsernameQuery("SELECT username, role FROM user WHERE username=?");
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+
         http
+                .httpBasic()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/users/**").hasRole("ADMIN, CASHIER")
+                .antMatchers("/api/users/username").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/users/**").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN, CASHIER")
-                .antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN");
+                .antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
+                .and()
+                .csrf().disable()
+                .formLogin().disable();
 
         http.csrf()
                 .ignoringAntMatchers("/h2-console/**");

@@ -1,5 +1,5 @@
 INSERT INTO user (username, password, first_name, last_name, email, role) VALUES
-  ('serhiilytka', '$2a$04$8km1JN9lPh4C3jn.lsAZiuIq.8xK4QZAWrzSZpZo6TpV7c4gi5Fyu', 'Serhii', 'Lytka', 'serhii@gmail.com', 'ADMIN'),
+  ('serhiilytka', '1111', 'Serhii', 'Lytka', 'serhii@gmail.com', 'ADMIN'),
   ('marypublic', '$2a$04$8km1JN9lPh4C3jn.lsAZiuIq.8xK4QZAWrzSZpZo6TpV7c4gi5Fyu', 'Mary', 'Public', 'mary@gmail.com', 'CASHIER'),
   ('johndou', '$2a$04$8km1JN9lPh4C3jn.lsAZiuIq.8xK4QZAWrzSZpZo6TpV7c4gi5Fyu', 'John', 'Dou', 'john@gmail.com', 'USER');
 

@@ -8,10 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,8 +26,27 @@ class UserController {
         this.modelMapper = modelMapper;
     }
 
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    public StringBuilder getUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            UserDetails ud = (UserDetails) principal;
+            StringBuilder sb = new StringBuilder();
+            sb.append("username: " + ud.getUsername());
+            sb.append("password: " + ud.getPassword());
+            sb.append("authorities: ");
+
+
+            return sb;
+
+        } else {
+            return null;
+        }
+    }
+
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll(@RequestHeader(name = "db", required = false, defaultValue = "h2") DataType db) {
+
         List<UserModel> userModels = userService.findAll(db);
 
         // Define the target type
