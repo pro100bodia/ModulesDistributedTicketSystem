@@ -1,7 +1,7 @@
-package com.ticketmaster.data.repository;
+package com.ticketmaster.client.data.repository;
 
-import com.ticketmaster.services.Application;
 import com.ticketmaster.services.persistence.entity.User;
+import com.ticketmaster.services.Application;
 import com.ticketmaster.services.persistence.repository.jpa.UserEntityRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

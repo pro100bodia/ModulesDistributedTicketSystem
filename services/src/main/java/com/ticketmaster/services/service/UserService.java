@@ -2,8 +2,8 @@ package com.ticketmaster.services.service;
 
 import com.ticketmaster.services.exceptions.NotFoundException;
 import com.ticketmaster.services.persistence.repository.DataType;
-import com.ticketmaster.services.persistence.repository.UserRepository;
 import com.ticketmaster.services.service.model.UserModel;
+import com.ticketmaster.services.persistence.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +21,6 @@ public class UserService {
 
         for (UserRepository userRepo : repositoryList) {
             if (userRepo.supportType(db)) {
-//                System.out.println("**********************************Repository type is:" + db);
                 suitableRepo = userRepo;
             }
         }
@@ -45,13 +44,14 @@ public class UserService {
 //        return result;
 //    }
 //
-//    public UserModel saveUser(UserModel userModel) {
-//        if (userModel == null || userModel.getUsername().equals("")) {
-//            throw new NotFoundException("Requested user is null");
-//        }
-//
-//        return userRepo.saveUser(userModel);
-//    }
+    public UserModel saveUser(UserModel userModel) {
+        
+        if (userModel == null || userModel.getUsername().equals("")) {
+            throw new NotFoundException("Requested user is null");
+        }
+
+        return userRepo.saveUser(userModel);
+    }
 //
 //
 //    public void deleteUser(String username) {

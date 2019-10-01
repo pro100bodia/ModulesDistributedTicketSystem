@@ -1,6 +1,6 @@
-package com.ticketmaster.functional_tests;
+package com.ticketmaster.client.functional_tests;
 
-import com.ticketmaster.TicketSystemClient;
+import com.ticketmaster.client.TicketSystemClient;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;

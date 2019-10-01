@@ -1,8 +1,8 @@
 package com.ticketmaster.services.persistence.repository.jpa;
 
 import com.ticketmaster.services.persistence.entity.Ticket;
-import com.ticketmaster.services.persistence.repository.TicketRepository;
 import com.ticketmaster.services.service.model.TicketModel;
+import com.ticketmaster.services.persistence.repository.TicketRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 

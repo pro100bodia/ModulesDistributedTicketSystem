@@ -1,4 +1,4 @@
-package com.ticketmaster;
+package com.ticketmaster.client;
 
 /**
  * Hello world!

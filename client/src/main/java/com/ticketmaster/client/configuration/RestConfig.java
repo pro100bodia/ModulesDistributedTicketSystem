@@ -1,6 +1,6 @@
-package com.ticketmaster.configuration;
+package com.ticketmaster.client.configuration;
 
-import com.ticketmaster.TicketSystemClient;
+import com.ticketmaster.client.TicketSystemClient;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

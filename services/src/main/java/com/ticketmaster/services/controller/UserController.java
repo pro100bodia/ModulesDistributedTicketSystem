@@ -1,9 +1,9 @@
 package com.ticketmaster.services.controller;
 
-import com.ticketmaster.api.dto.UserDto;
+import com.ticketmaster.client.api.dto.UserDto;
 import com.ticketmaster.services.persistence.repository.DataType;
-import com.ticketmaster.services.service.UserService;
 import com.ticketmaster.services.service.model.UserModel;
+import com.ticketmaster.services.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
@@ -65,12 +65,12 @@ class UserController {
 //        return new ResponseEntity<>(userDto, HttpStatus.OK);
 //    }
 //
-//    @PostMapping
-//    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
-//        UserModel userModel = modelMapper.map(userDto, UserModel.class);
-//
-//        return new ResponseEntity<>(modelMapper.map(userService.saveUser(userModel), UserDto.class), HttpStatus.OK);
-//    }
+    @PostMapping
+    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
+        UserModel userModel = modelMapper.map(userDto, UserModel.class);
+
+        return new ResponseEntity<>(modelMapper.map(userService.saveUser(userModel), UserDto.class), HttpStatus.OK);
+    }
 //
 //    @PutMapping("{username}")
 //    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {

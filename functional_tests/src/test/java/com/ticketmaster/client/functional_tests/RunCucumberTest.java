@@ -1,4 +1,4 @@
-package com.ticketmaster.functional_tests;
+package com.ticketmaster.client.functional_tests;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;

@@ -1,7 +1,7 @@
 package com.ticketmaster.services.controller;
 
 import com.google.gson.Gson;
-import com.ticketmaster.api.dto.UserDto;
+import com.ticketmaster.client.api.dto.UserDto;
 import com.ticketmaster.services.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
