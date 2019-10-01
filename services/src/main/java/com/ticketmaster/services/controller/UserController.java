@@ -2,14 +2,12 @@ package com.ticketmaster.services.controller;
 
 import com.ticketmaster.client.api.dto.UserDto;
 import com.ticketmaster.services.persistence.repository.DataType;
-import com.ticketmaster.services.service.model.UserModel;
 import com.ticketmaster.services.service.UserService;
+import com.ticketmaster.services.service.model.UserModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,24 +24,6 @@ class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @RequestMapping(value = "/username", method = RequestMethod.GET)
-    public StringBuilder getUsername() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            UserDetails ud = (UserDetails) principal;
-            StringBuilder sb = new StringBuilder();
-            sb.append("username: " + ud.getUsername());
-            sb.append("password: " + ud.getPassword());
-            sb.append("authorities: ");
-
-
-            return sb;
-
-        } else {
-            return null;
-        }
-    }
-
     @GetMapping
     public ResponseEntity<List<UserDto>> findAll(@RequestHeader(name = "db", required = false, defaultValue = "h2") DataType db) {
 
@@ -57,28 +37,36 @@ class UserController {
         return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 
-//    @GetMapping("{username}")
-//    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
-//        UserModel userModel = userService.getUserByUsername(username);
-//        UserDto userDto = modelMapper.map(userModel, UserDto.class);
-//
-//        return new ResponseEntity<>(userDto, HttpStatus.OK);
-//    }
-//
+    @GetMapping("{username}")
+    public ResponseEntity<UserDto> getUserByUsername(
+            @RequestHeader(name = "db", required = false, defaultValue = "h2") DataType db,
+            @PathVariable String username) {
+        UserModel userModel = userService.getUserByUsername(db, username);
+        UserDto userDto = modelMapper.map(userModel, UserDto.class);
+
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
     @PostMapping
-    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> saveUser(
+            @RequestHeader(name = "db", required = false, defaultValue = "h2") DataType db,
+            @RequestBody UserDto userDto) {
         UserModel userModel = modelMapper.map(userDto, UserModel.class);
 
-        return new ResponseEntity<>(modelMapper.map(userService.saveUser(userModel), UserDto.class), HttpStatus.OK);
+        return new ResponseEntity<>(modelMapper.map(userService.saveUser(db, userModel), UserDto.class), HttpStatus.OK);
     }
-//
-//    @PutMapping("{username}")
-//    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
-//        return saveUser(userDto);
-//    }
-//
-//    @DeleteMapping("{username}")
-//    public void deleteUser(@PathVariable String username) {
-//        userService.deleteUser(username);
-//    }
+
+    @PutMapping("{username}")
+    public ResponseEntity<UserDto> updateUser(
+            @RequestHeader(name = "db", required = false, defaultValue = "h2") DataType db,
+            @RequestBody UserDto userDto) {
+        return saveUser(db, userDto);
+    }
+
+    @DeleteMapping("{username}")
+    public void deleteUser(
+            @RequestHeader(name = "db", required = false, defaultValue = "h2") DataType db,
+            @PathVariable String username) {
+        userService.deleteUser(db, username);
+    }
 }
