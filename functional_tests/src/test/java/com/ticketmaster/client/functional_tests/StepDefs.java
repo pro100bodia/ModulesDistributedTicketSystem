@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
-public class StepDefs extends ItApplication {
+public class StepDefs extends ContextConfig {
     private List<UserDto> response;
 
     @Autowired

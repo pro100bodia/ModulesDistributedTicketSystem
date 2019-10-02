@@ -8,7 +8,5 @@ import org.springframework.test.context.ContextConfiguration;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ContextConfiguration(classes = {Application.class, RestConfig.class}, loader = SpringBootContextLoader.class)
-public class ItApplication {
-//    @LocalServerPort
-//    protected int port;
+public class ContextConfig {
 }
