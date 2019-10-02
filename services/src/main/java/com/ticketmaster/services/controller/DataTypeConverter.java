@@ -4,9 +4,11 @@ import com.ticketmaster.services.persistence.repository.DataType;
 import org.springframework.core.convert.converter.Converter;
 
 
-public class DataTypeConverter implements Converter<String, DataType> {
+public class DataTypeConverter implements Converter<DataType, String> {
     @Override
-    public DataType convert(String s) {
-        return DataType.of(s);
+    public String convert(DataType s) {
+        if (s.equals(DataType.H2))
+            return "userJdbcModelRepository";
+        return "userJpaModelRepository";
     }
 }
