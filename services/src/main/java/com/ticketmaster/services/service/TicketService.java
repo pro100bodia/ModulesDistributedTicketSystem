@@ -13,16 +13,7 @@ public class TicketService {
         this.ticketRepo = ticketRepository;
     }
 
-//    public List<TicketDto> getAllTickets() throws NotFoundException {
-////        return ticketRepository.findAll();
-////        if (result == null)
-////            throw new NotFoundException("Database does not contain any ticket");
-//
-////        return result;
-//    }
-
     public TicketModel findById(Long id) {
-
         return ticketRepo.findById(id);
     }
 }

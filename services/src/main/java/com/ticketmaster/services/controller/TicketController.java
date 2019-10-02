@@ -1,6 +1,6 @@
 package com.ticketmaster.services.controller;
 
-import com.ticketmaster.client.api.dto.TicketDto;
+import com.ticketmaster.api.dto.TicketDto;
 import com.ticketmaster.services.service.TicketService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.ticketmaster.services.controller;
 
-import com.ticketmaster.client.api.dto.UserDto;
+import com.ticketmaster.api.dto.UserDto;
 import com.ticketmaster.services.persistence.repository.DataType;
 import com.ticketmaster.services.service.UserService;
 import com.ticketmaster.services.service.model.UserModel;

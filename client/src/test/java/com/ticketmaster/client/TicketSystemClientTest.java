@@ -1,7 +1,7 @@
 package com.ticketmaster.client;
 
-import com.ticketmaster.client.api.dto.TicketDto;
-import com.ticketmaster.client.api.dto.UserDto;
+import com.ticketmaster.api.dto.TicketDto;
+import com.ticketmaster.api.dto.UserDto;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;

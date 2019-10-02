@@ -1,4 +1,4 @@
-package com.ticketmaster.client.api.dto;
+package com.ticketmaster.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

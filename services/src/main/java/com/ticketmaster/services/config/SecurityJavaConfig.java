@@ -1,4 +1,4 @@
-package com.ticketmaster.services.config.security;
+package com.ticketmaster.services.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +17,10 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
+    private static final String URL = "/api/users/**";
+    private static final String ROLE_ADMIN = "ADMIN";
+    private static final String ROLE_CASHIER = "CASHIER";
+
     @Autowired
     private DataSource dataSource;
 
@@ -41,10 +45,10 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/api/users/username").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/users/**").hasAnyRole("ADMIN", "CASHIER")
-                .antMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/users/**").hasAnyRole("ADMIN", "CASHIER")
-                .antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, URL).hasAnyRole(ROLE_ADMIN, ROLE_CASHIER)
+                .antMatchers(HttpMethod.POST, URL).hasRole(ROLE_ADMIN)
+                .antMatchers(HttpMethod.PUT, URL).hasAnyRole(ROLE_ADMIN, ROLE_CASHIER)
+                .antMatchers(HttpMethod.DELETE, URL).hasRole(ROLE_ADMIN)
                 .and()
                 .csrf().disable()
                 .formLogin().disable();

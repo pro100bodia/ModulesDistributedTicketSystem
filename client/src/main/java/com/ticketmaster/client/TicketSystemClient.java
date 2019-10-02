@@ -1,8 +1,11 @@
 package com.ticketmaster.client;
 
-import com.ticketmaster.client.api.dto.UserDto;
+import com.ticketmaster.api.dto.UserDto;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;

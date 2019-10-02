@@ -2,9 +2,8 @@ package com.ticketmaster.services.persistence.repository.jdbc;
 
 import com.ticketmaster.services.persistence.entity.Role;
 import com.ticketmaster.services.persistence.repository.DataType;
-import com.ticketmaster.services.service.model.TicketModel;
-import com.ticketmaster.services.service.model.UserModel;
 import com.ticketmaster.services.persistence.repository.UserRepository;
+import com.ticketmaster.services.service.model.UserModel;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +27,6 @@ public class UserJdbcModelRepository implements UserRepository {
 
     @Override
     public List<UserModel> findAll() {
-        //TODO: add tickets
         return jdbcTemplate.query("SELECT * FROM user", this::mapRowToUser);
     }
 
@@ -55,8 +53,7 @@ public class UserJdbcModelRepository implements UserRepository {
     public void deleteUser(String username) {
         UserModel user = findByUsername(username);
 
-        for (TicketModel ticket : user.getTickets())
-            jdbcTemplate.execute(String.format("DELETE * FROM ticket_user WHERE %d", user.getId()));
+        jdbcTemplate.execute(String.format("DELETE * FROM ticket_user WHERE %d", user.getId()));
 
         jdbcTemplate.execute(String.format("DELETE * FROM user WHERE %d", user.getId()));
     }
@@ -73,7 +70,4 @@ public class UserJdbcModelRepository implements UserRepository {
                 null);
     }
 
-//    private TicketModel getRawTickets(Long userId){
-//        return jdbcTemplate.query("SELECT * FROM ");
-//    }
 }
