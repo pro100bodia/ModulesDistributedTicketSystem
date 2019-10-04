@@ -103,13 +103,13 @@ public class UserControllerTest {
         //given
 
         //when
-        when(userService.findAll(DataType.H2)).thenReturn(userModels);
+        when(userService.findAll("DataType.H2")).thenReturn(userModels);
 
         java.lang.reflect.Type targetListType = new TypeToken<List<UserDto>>() {
         }.getType();
         when(modelMapper.map(userModels, targetListType)).thenReturn(userDtos);
 
-        ResponseEntity<List<UserDto>> result = subject.findAll(DataType.H2);
+        ResponseEntity<List<UserDto>> result = subject.findAll("");
 
         //then
         assertThat(userDtos).isEqualTo(result.getBody());

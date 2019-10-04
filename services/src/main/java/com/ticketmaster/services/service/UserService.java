@@ -23,8 +23,14 @@ public class UserService {
         this.dataTypeConverter = dataTypeConverter;
     }
 
-    public List<UserModel> findAll(DataType db) {
-        UserRepository suitableRepo = repositoryMap.get(dataTypeConverter.convert(db));
+    public List<UserModel> findAll(String db) {
+
+        if (db.equals("h2")) {
+            db = "userJpaModelRepository";
+        } else {
+            db = "userJdbcModelRepository";
+        }
+        UserRepository suitableRepo = repositoryMap.get(db);
 
         List<UserModel> userModels = suitableRepo.findAll();
 

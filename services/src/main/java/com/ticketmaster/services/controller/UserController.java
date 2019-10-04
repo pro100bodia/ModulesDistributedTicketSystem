@@ -1,23 +1,30 @@
 package com.ticketmaster.services.controller;
 
 import com.ticketmaster.api.dto.UserDto;
+import com.ticketmaster.services.anotatoin.Timer;
 import com.ticketmaster.services.persistence.repository.DataType;
 import com.ticketmaster.services.service.UserService;
 import com.ticketmaster.services.service.model.UserModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Timer
 @RestController
 @RequestMapping("/api/users")
-class UserController {
-
+public class UserController {
+    @Autowired
     private UserService userService;
-    private final ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public UserController() {
+    }
 
     UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
@@ -25,8 +32,8 @@ class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> findAll(@RequestHeader(name = "db", required = false, defaultValue = "h2") DataType db) {
-
+    public ResponseEntity<List<UserDto>> findAll(@RequestHeader(name = "db", required = false, defaultValue = "h2") String db) {
+        System.out.println("db");
         List<UserModel> userModels = userService.findAll(db);
 
         // Define the target type
@@ -70,3 +77,5 @@ class UserController {
         userService.deleteUser(db, username);
     }
 }
+
+

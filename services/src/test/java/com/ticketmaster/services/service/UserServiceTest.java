@@ -77,7 +77,7 @@ public class UserServiceTest {
         when(repositoryMap.get(dataTypeConverter.convert(DataType.H2))).thenReturn(repo);
 
         when(repo.findAll()).thenReturn(userModels);
-        List<UserModel> result = subject.findAll(DataType.H2);
+        List<UserModel> result = subject.findAll("DataType.H2");
 
         //then
         assertThat(userModels).isEqualTo(result);
