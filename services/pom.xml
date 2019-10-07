@@ -82,6 +82,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.ticketmaster</groupId>
+            <artifactId>logging</artifactId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
     <build>
@@ -90,7 +95,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.ticketmaster.services.Application</mainClass>
+                    <mainClass>com.ticketmaster.Application</mainClass>
                     <classifier>exec</classifier>
                     <layout>JAR</layout>
                 </configuration>
