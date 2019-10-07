@@ -1,4 +1,4 @@
-package com.ticketmaster.services;
+package com.ticketmaster;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
