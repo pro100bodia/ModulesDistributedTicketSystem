@@ -1,5 +1,5 @@
 node {
-    registry = 'serhiilytka/tm'
+    registry = 'bodiagoogle/tm'
     registryCredential = 'docker'
     dockerImage = ''
     def mvnHome
@@ -38,5 +38,4 @@ node {
             }
         }
     }
-    //stage('Remove Unused docker image')
 }
