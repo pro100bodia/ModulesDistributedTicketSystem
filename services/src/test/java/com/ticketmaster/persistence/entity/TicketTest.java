@@ -1,5 +1,6 @@
 package com.ticketmaster.persistence.entity;
 
+import com.ticketmaster.entity.Ticket;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 

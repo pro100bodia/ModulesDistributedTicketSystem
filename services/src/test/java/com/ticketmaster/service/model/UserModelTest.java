@@ -1,5 +1,6 @@
 package com.ticketmaster.service.model;
 
+import com.ticketmaster.model.UserModel;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 
