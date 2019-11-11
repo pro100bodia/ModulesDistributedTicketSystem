@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class JdbcPaginatedUserModelRepository implements UserRepository {
     private JdbcTemplate jdbcTemplate;
     private int page, size;
@@ -21,10 +23,11 @@ public class JdbcPaginatedUserModelRepository implements UserRepository {
         this.size = 3;
     }
 
-
-    public JdbcPaginatedUserModelRepository(JdbcTemplate jdbcTemplate, int page, int size) {
-        this.jdbcTemplate = jdbcTemplate;
+    public void setPage(int page) {
         this.page = page;
+    }
+
+    public void setSize(int size) {
         this.size = size;
     }
 

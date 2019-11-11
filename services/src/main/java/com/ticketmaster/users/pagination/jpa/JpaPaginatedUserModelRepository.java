@@ -6,16 +6,16 @@ import com.ticketmaster.users.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-@Primary
+@Repository
 public class JpaPaginatedUserModelRepository implements UserRepository {
     private PaginatedUserEntityRepository paginatedUserEntityRepository;
     private ModelMapper modelMapper;
@@ -30,14 +30,13 @@ public class JpaPaginatedUserModelRepository implements UserRepository {
         this.size = 3;
     }
 
-    public JpaPaginatedUserModelRepository(PaginatedUserEntityRepository paginatedUserEntityRepository,
-                                           ModelMapper modelMapper, int page, int size) {
-        this.paginatedUserEntityRepository = paginatedUserEntityRepository;
-        this.modelMapper = modelMapper;
+    public void setPage(int page) {
         this.page = page;
-        this.size = size;
     }
 
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     @Override
     public Page<UserModel> findAll() {

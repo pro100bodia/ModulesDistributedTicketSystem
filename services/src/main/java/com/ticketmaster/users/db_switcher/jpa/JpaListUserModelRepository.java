@@ -5,10 +5,12 @@ import com.ticketmaster.model.UserModel;
 import com.ticketmaster.users.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
+@Repository
 public class JpaListUserModelRepository implements UserRepository {
     private UserEntityRepository userEntityRepository;
     private ModelMapper modelMapper;

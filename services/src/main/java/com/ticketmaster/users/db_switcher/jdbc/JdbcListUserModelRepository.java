@@ -3,11 +3,13 @@ package com.ticketmaster.users.db_switcher.jdbc;
 import com.ticketmaster.model.UserModel;
 import com.ticketmaster.users.UserRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class JdbcListUserModelRepository implements UserRepository {
     private JdbcTemplate jdbcTemplate;
 
