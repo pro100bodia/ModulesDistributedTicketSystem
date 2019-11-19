@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.ticketmaster</groupId>
+        <groupId>com.pukhalskyi</groupId>
         <artifactId>root</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
@@ -17,7 +17,7 @@
             <version>3.2.4</version>
         </dependency>
         <dependency>
-            <groupId>com.ticketmaster</groupId>
+            <groupId>com.pukhalskyi</groupId>
             <artifactId>api</artifactId>
             <version>1.1-SNAPSHOT</version>
         </dependency>
@@ -83,7 +83,7 @@
             <version>5.1.6</version>
         </dependency>
         <dependency>
-            <groupId>com.ticketmaster</groupId>
+            <groupId>com.pukhalskyi</groupId>
             <artifactId>logging</artifactId>
             <version>1.1-SNAPSHOT</version>
         </dependency>
@@ -95,7 +95,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.ticketmaster.Application</mainClass>
+                    <mainClass>com.pukhalskyi.Application</mainClass>
                     <classifier>exec</classifier>
                     <layout>JAR</layout>
                 </configuration>

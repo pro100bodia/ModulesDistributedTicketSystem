@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>root</artifactId>
-        <groupId>com.ticketmaster</groupId>
+        <groupId>com.pukhalskyi</groupId>
         <version>1.1-SNAPSHOT</version>
     </parent>
 
@@ -38,13 +38,13 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.ticketmaster</groupId>
+            <groupId>com.pukhalskyi</groupId>
             <artifactId>services</artifactId>
             <version>1.1-SNAPSHOT</version>
 
         </dependency>
         <dependency>
-            <groupId>com.ticketmaster</groupId>
+            <groupId>com.pukhalskyi</groupId>
             <artifactId>client</artifactId>
             <version>1.1-SNAPSHOT</version>
             <scope>test</scope>

@@ -1,4 +1,4 @@
-package com.ticketmaster.exceptions;
+package com.pukhalskyi.exceptions;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,6 @@
-package com.ticketmaster.controller;
+package com.pukhalskyi.controller;
 
-import com.ticketmaster.Application;
+import com.pukhalskyi.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

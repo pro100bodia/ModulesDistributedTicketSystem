@@ -1,8 +1,8 @@
-package com.ticketmaster.controller;
+package com.pukhalskyi.controller;
 
 import com.google.gson.Gson;
-import com.ticketmaster.Application;
-import com.ticketmaster.api.dto.UserDto;
+import com.pukhalskyi.Application;
+import com.pukhalskyi.api.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

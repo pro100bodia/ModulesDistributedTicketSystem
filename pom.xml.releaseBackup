@@ -15,7 +15,7 @@
         <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.ticketmaster</groupId>
+    <groupId>com.pukhalskyi</groupId>
     <artifactId>root</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
